@@ -2,6 +2,7 @@ package com.example.demo.Model;
 
 import com.example.demo.CupHead;
 import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 
@@ -11,7 +12,7 @@ import java.io.FileNotFoundException;
 public class Airplane extends Rectangle {
     private static Airplane instance;
 
-    private  int health = 4 ;
+    private int health = 4;
 
     private boolean goingRight = false;
     private boolean goingLeft = false;
@@ -47,7 +48,7 @@ public class Airplane extends Rectangle {
         if (!(getX() + x > 1160 || getX() + x < 0)) setX(getX() + x);
         if (!(getY() + y > 600 || getY() + y < 0)) setY(getY() + y);
     }
-    
+
     public boolean isGoingRight() {
         return goingRight;
     }
@@ -106,6 +107,7 @@ public class Airplane extends Rectangle {
 
     public BigBossBullet collisionWithBigBossBullet() {
         for (BigBossBullet bullet : BigBossBullet.getBullets()) {
+            if (bullet.isDamaged()) continue;
             if (bullet.getBoundsInParent().intersects(this.getBoundsInParent())) return bullet;
         }
         return null;
@@ -113,6 +115,7 @@ public class Airplane extends Rectangle {
 
     public MiniBoss collisionWithMiniBoss() {
         for (MiniBoss miniBoss : MiniBoss.getMiniBosses()) {
+            if (miniBoss.getHealth() <= 0) continue;
             if (miniBoss.getBoundsInParent().intersects(this.getBoundsInParent())) return miniBoss;
         }
         return null;
@@ -124,5 +127,9 @@ public class Airplane extends Rectangle {
 
     public void setHealth(int health) {
         this.health = health;
+    }
+
+    public void takeDamage(int amount) {
+        setHealth(getHealth() - amount);
     }
 }

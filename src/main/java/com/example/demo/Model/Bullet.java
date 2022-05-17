@@ -1,6 +1,7 @@
 package com.example.demo.Model;
 
 import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 
@@ -38,6 +39,7 @@ public class Bullet extends Rectangle {
 
     public MiniBoss collisionWithMiniBoss() {
         for (MiniBoss miniBoss : MiniBoss.getMiniBosses()) {
+            if (miniBoss.getHealth() <= 0) continue;
             if (miniBoss.getBoundsInParent().intersects(this.getBoundsInParent()))
                 return miniBoss;
         }
@@ -50,6 +52,7 @@ public class Bullet extends Rectangle {
 
     public BigBossBullet collisionWithBigBossBullet() {
         for (BigBossBullet bullet : BigBossBullet.getBullets()) {
+            if (bullet.isDamaged()) continue;
             if (bullet.getBoundsInParent().intersects(this.getBoundsInParent()))
                 return bullet;
         }
@@ -62,5 +65,10 @@ public class Bullet extends Rectangle {
 
     public void setDamaged(boolean damaged) {
         this.damaged = damaged;
+    }
+
+    public void disappear() {
+        setDamaged(true);
+        setFill(Color.TRANSPARENT);
     }
 }

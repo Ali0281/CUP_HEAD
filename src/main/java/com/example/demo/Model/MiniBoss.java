@@ -54,5 +54,6 @@ public class MiniBoss extends Rectangle {
 
     public void died() {
         setFill(Color.TRANSPARENT);
+
     }
 }

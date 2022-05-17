@@ -25,11 +25,9 @@ public class Game {
         ProgramController.setupBackGround(pane);
 
         AirplaneAnimation airplaneAnimation = new AirplaneAnimation();
-        // hit --> miniBoss bigBoss bigBossBullet
         airplaneAnimation.play();
 
         BulletsAnimation bulletsAnimation = new BulletsAnimation();
-        // hit --> miniBoss bigBoss bigBossBullet
         bulletsAnimation.play();
 
         MiniBossAnimation miniBossAnimation = new MiniBossAnimation();
@@ -53,16 +51,25 @@ public class Game {
         {
             for (MiniBoss miniBoss : MiniBoss.getMiniBosses()) {
                 if (miniBoss.getX() < 0) pane.getChildren().remove(miniBoss);
+                else if (miniBoss.getHealth() <= 0) pane.getChildren().remove(miniBoss);
             }
             for (Bullet bullet : Bullet.getBullets()) {
                 if (bullet.getX() > 1280) pane.getChildren().remove(bullet);
+                else if (bullet.isDamaged()) pane.getChildren().remove(bullet);
             }
             for (BigBossBullet bullet : BigBossBullet.getBullets()) {
                 if (bullet.getX() < 0) pane.getChildren().remove(bullet);
+                else if (bullet.isDamaged()) pane.getChildren().remove(bullet);
             }
             MiniBoss.getMiniBosses().removeIf(x -> x.getX() < 0);
+            MiniBoss.getMiniBosses().removeIf(x -> x.getHealth() <= 0);
+
             Bullet.getBullets().removeIf(x -> x.getX() > 1280);
+            Bullet.getBullets().removeIf(x -> x.isDamaged());
+
             BigBossBullet.getBullets().removeIf(x -> x.getX() < 0);
+            BigBossBullet.getBullets().removeIf(x -> x.isDamaged());
+
 
         }, null, null));
 

@@ -32,24 +32,20 @@ public class BulletsAnimation extends Transition {
     }
 
     private void collisionBigBoss(Bullet bullet) {
-        bullet.setDamaged(true);
-        bullet.setFill(Color.TRANSPARENT);
+        bullet.disappear();
 
         BigBoss.getInstance().takeDamage(1);
         if (BigBoss.getInstance().idDead()) return; //todo
     }
 
     private void collisionBigBossBullet(BigBossBullet tempBigBossBullet, Bullet bullet) {
-        bullet.setDamaged(true);
-        bullet.setFill(Color.TRANSPARENT);
+        bullet.disappear();
 
-        tempBigBossBullet.setDamaged(true);
-        tempBigBossBullet.setFill(Color.TRANSPARENT);
+        tempBigBossBullet.disappear();
     }
 
     private void collisionMiniBoss(MiniBoss tempMiniBoss, Bullet bullet) {
-        bullet.setDamaged(true);
-        bullet.setFill(Color.TRANSPARENT);
+        bullet.disappear();
 
         tempMiniBoss.takeDamage(1);
         if (tempMiniBoss.isDead()) tempMiniBoss.died();

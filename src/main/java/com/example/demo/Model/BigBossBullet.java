@@ -1,6 +1,7 @@
 package com.example.demo.Model;
 
 import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 
@@ -42,6 +43,11 @@ public class BigBossBullet extends Rectangle {
 
     public void setDamaged(boolean damaged) {
         this.damaged = damaged;
+    }
+
+    public void disappear() {
+        setDamaged(true);
+        setFill(Color.TRANSPARENT);
     }
 }
 
