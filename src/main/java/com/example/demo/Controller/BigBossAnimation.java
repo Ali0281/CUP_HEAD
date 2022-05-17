@@ -19,6 +19,8 @@ public class BigBossAnimation extends Transition {
 
     @Override
     protected void interpolate(double frac) {
+        if (bigBoss.getHealth()<=0) return; //debugged
+
         int frame = (int) (frac * 60) % 6 + 1;
         try {
             bigBoss.setFill(new ImagePattern(new Image(new FileInputStream("src/main/resources/com/example/demo/airplaneImages/bigBoss/" + frame + ".png"))));

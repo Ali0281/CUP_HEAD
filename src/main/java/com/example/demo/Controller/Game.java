@@ -39,6 +39,7 @@ public class Game {
         BigBossBulletAnimation bigBossBulletAnimation = new BigBossBulletAnimation();
         bigBossBulletAnimation.play();
 
+
         backgroundTimerPlayer();
         backgroundTimerBoss();
         backgroundTimerMiniBoss();

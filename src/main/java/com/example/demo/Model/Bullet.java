@@ -39,7 +39,7 @@ public class Bullet extends Rectangle {
 
     public MiniBoss collisionWithMiniBoss() {
         for (MiniBoss miniBoss : MiniBoss.getMiniBosses()) {
-            if (miniBoss.getHealth() <= 0) continue;
+            if (miniBoss.getFill() == Color.TRANSPARENT) continue;
             if (miniBoss.getBoundsInParent().intersects(this.getBoundsInParent()))
                 return miniBoss;
         }

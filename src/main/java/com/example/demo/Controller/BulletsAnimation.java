@@ -35,7 +35,7 @@ public class BulletsAnimation extends Transition {
         bullet.disappear();
 
         BigBoss.getInstance().takeDamage(1);
-        if (BigBoss.getInstance().idDead()) return; //todo
+        if (BigBoss.getInstance().idDead()) BigBoss.getInstance().died();
     }
 
     private void collisionBigBossBullet(BigBossBullet tempBigBossBullet, Bullet bullet) {

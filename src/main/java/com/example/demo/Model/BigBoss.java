@@ -1,5 +1,6 @@
 package com.example.demo.Model;
 
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 public class BigBoss extends Rectangle {
@@ -46,5 +47,9 @@ public class BigBoss extends Rectangle {
 
     public boolean idDead() {
         return getHealth() <= 0;
+    }
+
+    public void died() {
+        setFill(Color.TRANSPARENT);
     }
 }
