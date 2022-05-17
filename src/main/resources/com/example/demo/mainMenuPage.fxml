@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane prefHeight="720" prefWidth="1280" fx:id="pane" stylesheets="@menu.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.Controller.MainMenuPageController">
+
+    <top>
+        <VBox alignment="CENTER">
+            <Text fill="6f0b70" text="main menu" textAlignment="CENTER" wrappingWidth="214.0625">
+                <font>
+                    <Font size="40.0" />
+                </font>
+            </Text>
+        </VBox>
+    </top>
+    <center>
+        <VBox fx:id="vBox" alignment="CENTER" maxWidth="350" spacing="10">
+            <Button onMouseClicked="#startNewGame" text="new game" />
+            <Button onMouseClicked="#continueGame" text="continue game" />
+            <Button onMouseClicked="#setUpProfilePage" text="profile page" />
+            <Button onMouseClicked="#setupRankingPage" text="ranking" />
+            <Button onMouseClicked="#exit" text="exit" />
+        </VBox>
+    </center>
+    <bottom>
+        <Text fill="6f0b70" text="created by : Ali Aghayari" textAlignment="CENTER" BorderPane.alignment="CENTER">
+            <font>
+                <Font size="32.0"/>
+            </font>
+        </Text>
+    </bottom>
+
+</BorderPane>
