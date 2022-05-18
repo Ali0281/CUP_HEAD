@@ -3,8 +3,8 @@ package com.example.demo.Controller;
 import com.example.demo.CupHead;
 import com.example.demo.Model.*;
 import com.example.demo.View.Menus;
+
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -19,11 +19,8 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
 
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -77,7 +74,10 @@ public class ProgramController {
                             case UP, W -> airplane.setGoingUp(true);
                             case RIGHT, D -> airplane.setGoingRight(true);
                             case LEFT, A -> airplane.setGoingLeft(true);
-                            case SPACE -> {airplane.setShooting(true); airplane.setPressedSpace(true);}
+                            case SPACE -> {
+                                airplane.setShooting(true);
+                                airplane.setPressedSpace(true);
+                            }
                         }
                     }
                 });
@@ -158,7 +158,7 @@ public class ProgramController {
         ArrayList<User> temp = createAClone();
         try {
             FileWriter myWriter = new FileWriter("src/main/resources/com/example/demo/savedData/users.json");
-            myWriter.write(new GsonBuilder().create().toJson(temp));
+            myWriter.write(new Gson().toJson(temp));
             myWriter.close();
         } catch (IOException e) {
             e.printStackTrace();
@@ -169,7 +169,7 @@ public class ProgramController {
         ArrayList<User> temp = new ArrayList<>();
         try {
             String users = new String(Files.readAllBytes(Paths.get("src/main/resources/com/example/demo/savedData/users.json")));
-            temp = new GsonBuilder().create().fromJson(users, new TypeToken<List<User>>() {
+            temp = new Gson().fromJson(users, new TypeToken<List<User>>() {
             }.getType());
         } catch (IOException e) {
             e.printStackTrace();

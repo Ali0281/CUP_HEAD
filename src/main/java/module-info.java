@@ -3,11 +3,13 @@ module com.example.demo {
     requires javafx.fxml;
     requires java.base;
     requires javafx.media;
-    requires gson;
+    requires com.google.gson;
 
 
     opens com.example.demo to javafx.fxml;
     exports com.example.demo;
     exports com.example.demo.Controller;
-    opens com.example.demo.Controller to javafx.fxml;
+    opens com.example.demo.Controller to javafx.fxml, com.google.json;
+
+
 }

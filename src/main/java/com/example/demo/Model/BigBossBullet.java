@@ -34,7 +34,8 @@ public class BigBossBullet extends Rectangle {
     }
 
     public void move() {
-        setX(getX() - 5);
+        if (BigBoss.getInstance().getHealth() > 0) setX(getX() - 5);
+        else setY(getY() - 5);
     }
 
     public boolean isDamaged() {

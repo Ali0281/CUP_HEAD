@@ -9,8 +9,8 @@ public class User {
     private String password;
     private int avatar;
 
-    @Expose(serialize = false, deserialize = false)
-    private URL image;
+//    @Expose(serialize = false, deserialize = false)
+//    private URL image;
 
     private int highScore = 0;
 
@@ -52,11 +52,11 @@ public class User {
         this.highScore = highScore;
     }
 
-    public URL getImage() {
-        return image;
-    }
-
-    public void setImage(URL image) {
-        this.image = image;
-    }
+//    public URL getImage() {
+//        return image;
+//    }
+//
+//    public void setImage(URL image) {
+//        this.image = image;
+//    }
 }

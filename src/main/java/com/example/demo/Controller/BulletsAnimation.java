@@ -23,6 +23,7 @@ public class BulletsAnimation extends Transition {
         MiniBoss tempMiniBoss;
         BigBossBullet tempBigBossBullet;
         for (Bullet bullet : bullets) {
+            if (bullet.isDamaged()) continue;
             bullet.move();
             if ((tempMiniBoss = bullet.collisionWithMiniBoss()) != null) collisionMiniBoss(tempMiniBoss, bullet);
             else if ((tempBigBossBullet = bullet.collisionWithBigBossBullet()) != null)
@@ -35,7 +36,7 @@ public class BulletsAnimation extends Transition {
         bullet.disappear();
 
         BigBoss.getInstance().takeDamage(1);
-        if (BigBoss.getInstance().idDead()) BigBoss.getInstance().died();
+//        if (BigBoss.getInstance().idDead()) BigBoss.getInstance().died();  todo : !!!!!!!!!!!!!!!!!!!!!!!!
     }
 
     private void collisionBigBossBullet(BigBossBullet tempBigBossBullet, Bullet bullet) {
