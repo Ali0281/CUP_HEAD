@@ -12,7 +12,7 @@ import java.io.FileNotFoundException;
 public class Airplane extends Rectangle {
     private static Airplane instance;
 
-    private int health = 4;
+    private int health = 6;
 
     private boolean goingRight = false;
     private boolean goingLeft = false;
@@ -20,6 +20,8 @@ public class Airplane extends Rectangle {
     private boolean goingDown = false;
     private boolean shooting = false;
     private boolean pressedSpace = false;
+
+    private int blink_time = 0;
 
     private Airplane() {
         super(50, 300, 120, 120);
@@ -131,5 +133,21 @@ public class Airplane extends Rectangle {
 
     public void takeDamage(int amount) {
         setHealth(getHealth() - amount);
+    }
+
+    public boolean isBlink() {
+        return blink_time > 0;
+    }
+
+    public void blink() {
+        setBlink_time(6);
+    }
+
+    public int getBlink_time() {
+        return blink_time;
+    }
+
+    public void setBlink_time(int blink_time) {
+        this.blink_time = blink_time;
     }
 }

@@ -10,8 +10,8 @@ public class MiniBoss extends Rectangle {
 
     private int health = 2;
 
-    public MiniBoss() {
-        super(1280, Math.floor(Math.random() * (640 + 1) + 40), 60, 60);
+    public MiniBoss(int random) {
+        super(1280, random , 60, 60);
         miniBosses.add(this);
 
     }

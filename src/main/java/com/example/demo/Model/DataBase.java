@@ -9,6 +9,8 @@ public class DataBase {
     private User loggedInUser;
     private int difficulty;
 
+    private GameData lastGameData;
+
     private DataBase() {
         setUsers(new ArrayList<>());
         setLoggedInUser(null);
@@ -59,5 +61,13 @@ public class DataBase {
     public void removeLoggedInUser() {
         getUsers().remove(getLoggedInUser());
         setLoggedInUser(null);
+    }
+
+    public GameData getLastGameData() {
+        return lastGameData;
+    }
+
+    public void setLastGameData(GameData lastGameData) {
+        this.lastGameData = lastGameData;
     }
 }

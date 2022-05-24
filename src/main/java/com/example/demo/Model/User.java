@@ -13,6 +13,7 @@ public class User {
 //    private URL image;
 
     private int highScore = 0;
+    private int BestTime = Integer.MAX_VALUE;
 
     public User(String username, String password, int avatar) {
         setPassword(password);
@@ -50,6 +51,14 @@ public class User {
 
     public void setHighScore(int highScore) {
         this.highScore = highScore;
+    }
+
+    public int getBestTime() {
+        return BestTime;
+    }
+
+    public void setBestTime(int bestTime) {
+        BestTime = bestTime;
     }
 
 //    public URL getImage() {

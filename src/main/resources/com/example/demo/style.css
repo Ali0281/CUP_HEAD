@@ -1,0 +1,48 @@
+.root {
+    -fx-background-size: contain, contain, contain, contain, contain, contain;
+    -fx-background-position: bottom, bottom, bottom, bottom, bottom, bottom;
+    -fx-background-repeat: repeat-x, repeat-x, repeat-x, repeat-x, repeat-x, repeat-x;
+
+    -fx-background-image: url("backgroundPic/layer_06_1920x1080.png"),
+    url("backgroundPic/layer_05_1920x1080.png"),
+    url("backgroundPic/layer_04_1920x1080.png"),
+    url("backgroundPic/layer_03_1920x1080.png"),
+    url("backgroundPic/layer_02_1920x1080.png"),
+    url("backgroundPic/layer_01_1920x1080.png");
+}
+
+Text {
+    -fx-font-weight: bold;
+    -fx-text-alignment: center;
+    -fx-text-fill: "#6f0b70";
+    -fx-border-radius: 5;
+    -fx-pref-width: 550;
+    -fx-pref-height: 35;
+
+    -fx-font-size: 32px;
+    -fx-font-family: "Arial Black";
+    -fx-fill: #2A5058;
+    -fx-effect: innershadow(three-pass-box, rgb(42, 125, 143), 6, 0.0, 0, 2);
+}
+
+Button:hover {
+    -fx-background-color: linear-gradient(#2A5058, #61a2b1);
+}
+
+Button {
+    -fx-pref-width: 330;
+    -fx-pref-height: 35;
+    -fx-border-radius: 5;
+    -fx-font-size: 20;
+    /*-fx-text-fill: "#6f0b70";*/
+    -fx-text-fill: white;
+    -fx-font-family: "Arial Narrow";
+    -fx-font-weight: bold;
+    -fx-background-color: linear-gradient(#61a2b1, #2A5058);
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.6), 5, 0.0, 0, 1);
+}
+
+ProgressBar {
+
+}
+

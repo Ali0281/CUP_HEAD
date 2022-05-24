@@ -6,7 +6,8 @@ public enum Menus {
     MAIN_MENU("mainMenuPage.fxml"),
     PROFILE_MENU("profilePage.fxml"),
     RANKING_PAGE("rankingPage.fxml"),
-    AVATAR_SELECTION("avatarSelection.fxml")
+    AVATAR_SELECTION("avatarSelection.fxml"),
+    SCORE_PAGE("scorePage.fxml"),
     ;
 
     private final String name;
