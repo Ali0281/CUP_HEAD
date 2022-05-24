@@ -3,10 +3,11 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane prefHeight="720" prefWidth="1280" fx:id="pane" stylesheets="@style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.Controller.MainMenuPageController">
+<BorderPane fx:id="pane" prefHeight="720" prefWidth="1280" stylesheets="@style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.Controller.MainMenuPageController">
 
     <top>
         <VBox alignment="CENTER">
@@ -19,6 +20,7 @@
     </top>
     <center>
         <VBox fx:id="vBox" alignment="CENTER" maxWidth="350" spacing="10">
+         <Rectangle fx:id="rectangle" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="126.0" stroke="BLACK" strokeType="INSIDE" width="126.0" />
             <Button onMouseClicked="#startNewGame" text="new game" />
             <Button onMouseClicked="#continueGame" text="continue game" />
             <Button onMouseClicked="#setUpProfilePage" text="profile page" />
@@ -29,7 +31,7 @@
     <bottom>
         <Text fill="6f0b70" text="created by : Ali Aghayari" textAlignment="CENTER" BorderPane.alignment="CENTER">
             <font>
-                <Font size="32.0"/>
+                <Font size="32.0" />
             </font>
         </Text>
     </bottom>

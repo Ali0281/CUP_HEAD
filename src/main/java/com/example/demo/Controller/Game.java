@@ -4,32 +4,49 @@ import com.example.demo.Model.*;
 import com.example.demo.View.Menus;
 import javafx.animation.*;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
+import javafx.scene.media.AudioClip;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
 
 public class Game {
+    AudioClip buzzer= new AudioClip(new File("src/main/resources/com/example/demo/music/shoot.wav").toURI().toString());
+
     private Timeline timelineBackgroundPlayer = new Timeline();
     private Timeline timelineBackgroundBoss = new Timeline();
     private Timeline timelineBackgroundMiniBoss = new Timeline();
     private Timeline garbageCleaner = new Timeline();
+    private boolean running = true;
 
     private long startTime;
 
     private Airplane airplane = Airplane.getInstance();
     private BigBoss bigBoss = BigBoss.getInstance();
 
+    AirplaneAnimation airplaneAnimation = new AirplaneAnimation();
+    BulletsAnimation bulletsAnimation = new BulletsAnimation();
+    MiniBossAnimation miniBossAnimation = new MiniBossAnimation();
+    BigBossAnimation bigBossAnimation = new BigBossAnimation();
+    BigBossBulletAnimation bigBossBulletAnimation = new BigBossBulletAnimation();
+
+
     @FXML
     private Pane pane;
     @FXML
     private ProgressBar progressBar;
+    @FXML
+    private Label healthLabel;
+    @FXML
+    private Label scoreLabel;
 
 
     public void initialize() {
@@ -40,21 +57,11 @@ public class Game {
 
         startTime = System.currentTimeMillis();
 
-        AirplaneAnimation airplaneAnimation = new AirplaneAnimation();
         airplaneAnimation.play();
-
-        BulletsAnimation bulletsAnimation = new BulletsAnimation();
         bulletsAnimation.play();
-
-        MiniBossAnimation miniBossAnimation = new MiniBossAnimation();
         miniBossAnimation.play();
-
-        BigBossAnimation bigBossAnimation = new BigBossAnimation();
         bigBossAnimation.play();
-
-        BigBossBulletAnimation bigBossBulletAnimation = new BigBossBulletAnimation();
         bigBossBulletAnimation.play();
-
 
         backgroundTimerPlayer();
         backgroundTimerBoss();
@@ -63,7 +70,7 @@ public class Game {
     }
 
     private void addHealthBar() {
-        for (int i = 5; i >= 0; i--) {
+        for (int i = airplane.getHealth() - 1; i >= 0; i--) {
             Rectangle health = new Rectangle(30, 30);
             health.setX(i * 30);
             try {
@@ -104,6 +111,7 @@ public class Game {
         }, null, null));
 
         garbageCleaner.play();
+
     }
 
     private void backgroundTimerBoss() {
@@ -114,6 +122,7 @@ public class Game {
         }, null, null));
 
         timelineBackgroundBoss.play();
+
     }
 
     private void backgroundTimerMiniBoss() {
@@ -127,8 +136,8 @@ public class Game {
 
 
         }, null, null));
-
         timelineBackgroundMiniBoss.play();
+
     }
 
 
@@ -138,19 +147,24 @@ public class Game {
         {
             if (airplane.isShooting() || airplane.isPressedSpace()) {
                 pane.getChildren().add(airplane.shoot());
+                buzzer.play();
                 airplane.setPressedSpace(false);
             }
+            // label update
+            scoreLabel.setText(String.valueOf(DataBase.getInstance().getLastGameData().getScore()));
+            healthLabel.setText(String.valueOf(bigBoss.getHealth()));
+
 
             // boss :
             if (bigBoss.getHealth() > 0) progressBar.setProgress(((double) bigBoss.getHealth()) / 20);
             else progressBar.setProgress(((double) bigBoss.getHealth() + 10) / 10);
 
             // blink
-            if (airplane.getBlink_time() == 6) pane.getChildren().remove(1);
+            if (airplane.getBlink_time() == 6) pane.getChildren().remove(3);
             airplane.setBlink_time(airplane.getBlink_time() - 1);
             // end game :
 
-            if (bigBoss.getHealth() <= -10) {
+            if (running && bigBoss.getHealth() <= -10) {
                 DataBase.getInstance().getLastGameData().setWin(true);
                 DataBase.getInstance().getLastGameData().setTime((System.currentTimeMillis() - startTime) / 1000 + 1);
                 DataBase.getInstance().getLastGameData().setScore(DataBase.getInstance().getLastGameData().getScore() + 2000 / (int) DataBase.getInstance().getLastGameData().getTime());
@@ -159,20 +173,24 @@ public class Game {
                     DataBase.getInstance().getLoggedInUser().setBestTime((int) DataBase.getInstance().getLastGameData().getTime());
                 }
 
+                running = false;
+
 
                 ProgramController.changeMenu(Menus.SCORE_PAGE);
-            } else if (airplane.getHealth() <= 0) {
+            } else if (running && airplane.getHealth() <= 0) {
                 DataBase.getInstance().getLastGameData().setWin(false);
                 DataBase.getInstance().getLastGameData().setTime((System.currentTimeMillis() - startTime) / 1000 + 1);
                 if (DataBase.getInstance().getLoggedInUser() != null && DataBase.getInstance().getLoggedInUser().getHighScore() < DataBase.getInstance().getLastGameData().getScore()) {
                     DataBase.getInstance().getLoggedInUser().setHighScore(DataBase.getInstance().getLastGameData().getScore());
                     DataBase.getInstance().getLoggedInUser().setBestTime((int) DataBase.getInstance().getLastGameData().getTime());
                 }
+
+                running = false;
+
                 ProgramController.changeMenu(Menus.SCORE_PAGE);
             }
 
         }, null, null));
-
         timelineBackgroundPlayer.play();
     }
 }

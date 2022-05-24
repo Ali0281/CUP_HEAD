@@ -19,8 +19,11 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -139,19 +142,19 @@ public class ProgramController {
     }
 
     public static void playMenuSong() {
-//        final File file = new File("src/main/resources/com/example/demo/music/menuMusic.mp3");
-//        if (CupHead.mediaPlayer != null) CupHead.mediaPlayer.pause();
-//        CupHead.mediaPlayer = new MediaPlayer(new Media(file.toURI().toString()));
-//        CupHead.mediaPlayer.setCycleCount(-1);
-//        CupHead.mediaPlayer.play();
+        final File file = new File("src/main/resources/com/example/demo/music/menuMusic.mp3");
+        if (CupHead.mediaPlayer != null) CupHead.mediaPlayer.pause();
+        CupHead.mediaPlayer = new MediaPlayer(new Media(file.toURI().toString()));
+        CupHead.mediaPlayer.setCycleCount(-1);
+        CupHead.mediaPlayer.play();
     }
 
     public static void playGameSong() {
-//        final File file = new File("src/main/resources/com/example/demo/music/gameMusic.mp3");
-//        if (CupHead.mediaPlayer != null) CupHead.mediaPlayer.pause();
-//        CupHead.mediaPlayer = new MediaPlayer(new Media(file.toURI().toString()));
-//        CupHead.mediaPlayer.setCycleCount(-1);
-//        CupHead.mediaPlayer.play();
+        final File file = new File("src/main/resources/com/example/demo/music/gameMusic.mp3");
+        if (CupHead.mediaPlayer != null) CupHead.mediaPlayer.pause();
+        CupHead.mediaPlayer = new MediaPlayer(new Media(file.toURI().toString()));
+        CupHead.mediaPlayer.setCycleCount(-1);
+        CupHead.mediaPlayer.play();
     }
 
     public static void saveUsersData() {

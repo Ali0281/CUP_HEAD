@@ -1,9 +1,6 @@
 package com.example.demo.Controller;
 
-import com.example.demo.Model.BigBoss;
-import com.example.demo.Model.BigBossBullet;
-import com.example.demo.Model.Bullet;
-import com.example.demo.Model.MiniBoss;
+import com.example.demo.Model.*;
 import javafx.animation.Transition;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
@@ -34,22 +31,25 @@ public class BulletsAnimation extends Transition {
 
     private void collisionBigBoss(Bullet bullet) {
         bullet.disappear();
-
         BigBoss.getInstance().takeDamage(1);
-//        if (BigBoss.getInstance().idDead()) BigBoss.getInstance().died();  todo : !!!!!!!!!!!!!!!!!!!!!!!!
     }
 
     private void collisionBigBossBullet(BigBossBullet tempBigBossBullet, Bullet bullet) {
         bullet.disappear();
 
         tempBigBossBullet.disappear();
+        DataBase.getInstance().getLastGameData().setScore(DataBase.getInstance().getLastGameData().getScore() + 10);
+
     }
 
     private void collisionMiniBoss(MiniBoss tempMiniBoss, Bullet bullet) {
         bullet.disappear();
 
         tempMiniBoss.takeDamage(1);
-        if (tempMiniBoss.isDead()) tempMiniBoss.died();
+        if (tempMiniBoss.isDead()) {
+            tempMiniBoss.died();
+            DataBase.getInstance().getLastGameData().setScore(DataBase.getInstance().getLastGameData().getScore() + 20);
+        }
 
     }
 

@@ -8,10 +8,6 @@ public class User {
     private String username;
     private String password;
     private int avatar;
-
-//    @Expose(serialize = false, deserialize = false)
-//    private URL image;
-
     private int highScore = 0;
     private int BestTime = Integer.MAX_VALUE;
 
