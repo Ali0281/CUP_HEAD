@@ -21,7 +21,7 @@ public class ScorePageController {
         if (gameData.isWin()) vBox.getChildren().add(new Text("you won!!"));
         else vBox.getChildren().add(new Text("you lost!!"));
         vBox.getChildren().add(new Text("score : " + gameData.getScore()));
-        vBox.getChildren().add(new Text("time () : " + gameData.getTime()));
+        vBox.getChildren().add(new Text("time (S) : " + gameData.getTime()));
     }
 
     public void gotoMainMenu(MouseEvent mouseEvent) {

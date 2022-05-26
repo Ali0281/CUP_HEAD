@@ -12,7 +12,7 @@ import java.io.FileNotFoundException;
 public class Airplane extends Rectangle {
     private static Airplane instance;
 
-    private int health = 6;
+    private int health = 5;
 
     private boolean goingRight = false;
     private boolean goingLeft = false;

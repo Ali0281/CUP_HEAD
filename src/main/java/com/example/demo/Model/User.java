@@ -57,11 +57,4 @@ public class User {
         BestTime = bestTime;
     }
 
-//    public URL getImage() {
-//        return image;
-//    }
-//
-//    public void setImage(URL image) {
-//        this.image = image;
-//    }
 }

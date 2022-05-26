@@ -187,12 +187,6 @@ public class ProgramController {
     }
 
     private static ArrayList<User> createAClone() {
-//        ArrayList<User> temp = new ArrayList<>();
-//        for (User user : DataBase.getInstance().getUsers()) {
-//            temp.add(user);
-//        }
-//        return temp;
-
         return (ArrayList<User>) DataBase.getInstance().getUsers().clone();
     }
 }

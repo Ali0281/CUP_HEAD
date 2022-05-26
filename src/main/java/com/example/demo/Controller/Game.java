@@ -19,7 +19,7 @@ import java.io.FileNotFoundException;
 
 
 public class Game {
-    AudioClip buzzer= new AudioClip(new File("src/main/resources/com/example/demo/music/shoot.wav").toURI().toString());
+    AudioClip buzzer = new AudioClip(new File("src/main/resources/com/example/demo/music/shoot.wav").toURI().toString());
 
     private Timeline timelineBackgroundPlayer = new Timeline();
     private Timeline timelineBackgroundBoss = new Timeline();
@@ -86,32 +86,40 @@ public class Game {
         garbageCleaner.setCycleCount(Timeline.INDEFINITE);
         garbageCleaner.getKeyFrames().add(new KeyFrame(Duration.millis(5000), (actionEvent) ->
         {
-            for (MiniBoss miniBoss : MiniBoss.getMiniBosses()) {
-                if (miniBoss.getX() < 0) pane.getChildren().remove(miniBoss);
-                else if (miniBoss.getHealth() <= 0) pane.getChildren().remove(miniBoss);
-            }
-            for (Bullet bullet : Bullet.getBullets()) {
-                if (bullet.getX() > 1280) pane.getChildren().remove(bullet);
-                else if (bullet.isDamaged()) pane.getChildren().remove(bullet);
-            }
-            for (BigBossBullet bullet : BigBossBullet.getBullets()) {
-                if (bullet.getX() < 0) pane.getChildren().remove(bullet);
-                else if (bullet.isDamaged()) pane.getChildren().remove(bullet);
-            }
-            MiniBoss.getMiniBosses().removeIf(x -> x.getX() < 0);
-            MiniBoss.getMiniBosses().removeIf(x -> x.getHealth() <= 0);
-
-            Bullet.getBullets().removeIf(x -> x.getX() > 1280);
-            Bullet.getBullets().removeIf(x -> x.isDamaged());
-
-            BigBossBullet.getBullets().removeIf(x -> x.getX() < 0);
-            BigBossBullet.getBullets().removeIf(x -> x.isDamaged());
-
-
+            removeMiniBoss();
+            removeBigBoss();
+            removeBigBossBullet();
         }, null, null));
 
         garbageCleaner.play();
 
+    }
+
+    private void removeBigBossBullet() {
+        for (BigBossBullet bullet : BigBossBullet.getBullets()) {
+            if (bullet.getX() < 0) pane.getChildren().remove(bullet);
+            else if (bullet.isDamaged()) pane.getChildren().remove(bullet);
+        }
+        BigBossBullet.getBullets().removeIf(x -> x.getX() < 0);
+        BigBossBullet.getBullets().removeIf(x -> x.isDamaged());
+    }
+
+    private void removeBigBoss() {
+        for (Bullet bullet : Bullet.getBullets()) {
+            if (bullet.getX() > 1280) pane.getChildren().remove(bullet);
+            else if (bullet.isDamaged()) pane.getChildren().remove(bullet);
+        }
+        Bullet.getBullets().removeIf(x -> x.getX() > 1280);
+        Bullet.getBullets().removeIf(x -> x.isDamaged());
+    }
+
+    private void removeMiniBoss() {
+        for (MiniBoss miniBoss : MiniBoss.getMiniBosses()) {
+            if (miniBoss.getX() < 0) pane.getChildren().remove(miniBoss);
+            else if (miniBoss.getHealth() <= 0) pane.getChildren().remove(miniBoss);
+        }
+        MiniBoss.getMiniBosses().removeIf(x -> x.getX() < 0);
+        MiniBoss.getMiniBosses().removeIf(x -> x.getHealth() <= 0);
     }
 
     private void backgroundTimerBoss() {
@@ -133,8 +141,6 @@ public class Game {
             pane.getChildren().add(new MiniBoss(y_axis));
             pane.getChildren().add(new MiniBoss(y_axis + 60));
             pane.getChildren().add(new MiniBoss(y_axis - 60));
-
-
         }, null, null));
         timelineBackgroundMiniBoss.play();
 
@@ -145,52 +151,66 @@ public class Game {
         timelineBackgroundPlayer.setCycleCount(Timeline.INDEFINITE);
         timelineBackgroundPlayer.getKeyFrames().add(new KeyFrame(Duration.millis(500), (actionEvent) ->
         {
-            if (airplane.isShooting() || airplane.isPressedSpace()) {
-                pane.getChildren().add(airplane.shoot());
-                buzzer.play();
-                airplane.setPressedSpace(false);
-            }
-            // label update
-            scoreLabel.setText(String.valueOf(DataBase.getInstance().getLastGameData().getScore()));
-            healthLabel.setText(String.valueOf(bigBoss.getHealth()));
-
-
-            // boss :
-            if (bigBoss.getHealth() > 0) progressBar.setProgress(((double) bigBoss.getHealth()) / 20);
-            else progressBar.setProgress(((double) bigBoss.getHealth() + 10) / 10);
-
-            // blink
-            if (airplane.getBlink_time() == 6) pane.getChildren().remove(3);
-            airplane.setBlink_time(airplane.getBlink_time() - 1);
-            // end game :
+            airPlaneShoot();
+            updateLabel();
+            bossCalculator();
+            airPlaneBlink();
 
             if (running && bigBoss.getHealth() <= -10) {
-                DataBase.getInstance().getLastGameData().setWin(true);
-                DataBase.getInstance().getLastGameData().setTime((System.currentTimeMillis() - startTime) / 1000 + 1);
-                DataBase.getInstance().getLastGameData().setScore(DataBase.getInstance().getLastGameData().getScore() + 2000 / (int) DataBase.getInstance().getLastGameData().getTime());
-                if (DataBase.getInstance().getLoggedInUser() != null && DataBase.getInstance().getLoggedInUser().getHighScore() < DataBase.getInstance().getLastGameData().getScore()) {
-                    DataBase.getInstance().getLoggedInUser().setHighScore(DataBase.getInstance().getLastGameData().getScore());
-                    DataBase.getInstance().getLoggedInUser().setBestTime((int) DataBase.getInstance().getLastGameData().getTime());
-                }
-
-                running = false;
-
-
+                winCondition();
                 ProgramController.changeMenu(Menus.SCORE_PAGE);
             } else if (running && airplane.getHealth() <= 0) {
-                DataBase.getInstance().getLastGameData().setWin(false);
-                DataBase.getInstance().getLastGameData().setTime((System.currentTimeMillis() - startTime) / 1000 + 1);
-                if (DataBase.getInstance().getLoggedInUser() != null && DataBase.getInstance().getLoggedInUser().getHighScore() < DataBase.getInstance().getLastGameData().getScore()) {
-                    DataBase.getInstance().getLoggedInUser().setHighScore(DataBase.getInstance().getLastGameData().getScore());
-                    DataBase.getInstance().getLoggedInUser().setBestTime((int) DataBase.getInstance().getLastGameData().getTime());
-                }
-
-                running = false;
-
+                loseCindition();
                 ProgramController.changeMenu(Menus.SCORE_PAGE);
             }
 
         }, null, null));
         timelineBackgroundPlayer.play();
+    }
+
+    private void loseCindition() {
+        DataBase.getInstance().getLastGameData().setWin(false);
+        DataBase.getInstance().getLastGameData().setTime((System.currentTimeMillis() - startTime) / 1000 + 1);
+        if (DataBase.getInstance().getLoggedInUser() != null && DataBase.getInstance().getLoggedInUser().getHighScore() < DataBase.getInstance().getLastGameData().getScore()) {
+            DataBase.getInstance().getLoggedInUser().setHighScore(DataBase.getInstance().getLastGameData().getScore());
+            DataBase.getInstance().getLoggedInUser().setBestTime((int) DataBase.getInstance().getLastGameData().getTime());
+        }
+
+        running = false;
+    }
+
+    private void winCondition() {
+        DataBase.getInstance().getLastGameData().setWin(true);
+        DataBase.getInstance().getLastGameData().setTime((System.currentTimeMillis() - startTime) / 1000 + 1);
+        DataBase.getInstance().getLastGameData().setScore(DataBase.getInstance().getLastGameData().getScore() + 2000 / (int) DataBase.getInstance().getLastGameData().getTime());
+        if (DataBase.getInstance().getLoggedInUser() != null && DataBase.getInstance().getLoggedInUser().getHighScore() < DataBase.getInstance().getLastGameData().getScore()) {
+            DataBase.getInstance().getLoggedInUser().setHighScore(DataBase.getInstance().getLastGameData().getScore());
+            DataBase.getInstance().getLoggedInUser().setBestTime((int) DataBase.getInstance().getLastGameData().getTime());
+        }
+
+        running = false;
+    }
+
+    private void airPlaneBlink() {
+        if (airplane.getBlink_time() == 6) pane.getChildren().remove(3);
+        airplane.setBlink_time(airplane.getBlink_time() - 1);
+    }
+
+    private void bossCalculator() {
+        if (bigBoss.getHealth() > 0) progressBar.setProgress(((double) bigBoss.getHealth()) / 20);
+        else progressBar.setProgress(((double) bigBoss.getHealth() + 10) / 10);
+    }
+
+    private void updateLabel() {
+        scoreLabel.setText(String.valueOf(DataBase.getInstance().getLastGameData().getScore()));
+        healthLabel.setText(String.valueOf(bigBoss.getHealth()));
+    }
+
+    private void airPlaneShoot() {
+        if (airplane.isShooting() || airplane.isPressedSpace()) {
+            pane.getChildren().add(airplane.shoot());
+            buzzer.play();
+            airplane.setPressedSpace(false);
+        }
     }
 }
