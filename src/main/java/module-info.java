@@ -10,5 +10,9 @@ module com.example.demo {
     exports com.example.demo;
     exports com.example.demo.Controller;
     opens com.example.demo.Controller to javafx.fxml, com.google.gson;
+    exports com.example.demo.View.sceneController;
+    opens com.example.demo.View.sceneController to com.google.gson, javafx.fxml;
+    exports com.example.demo.Controller.animationController;
+    opens com.example.demo.Controller.animationController to com.google.gson, javafx.fxml;
 
 }

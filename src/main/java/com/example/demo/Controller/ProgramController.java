@@ -2,6 +2,8 @@ package com.example.demo.Controller;
 
 import com.example.demo.CupHead;
 import com.example.demo.Model.*;
+import com.example.demo.View.Component.Airplane;
+import com.example.demo.View.Component.BigBoss;
 import com.example.demo.View.Menus;
 
 import com.google.gson.Gson;

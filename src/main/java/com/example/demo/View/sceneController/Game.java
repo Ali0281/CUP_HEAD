@@ -1,7 +1,10 @@
-package com.example.demo.Controller;
+package com.example.demo.View.sceneController;
 
+import com.example.demo.Controller.*;
 import com.example.demo.Model.*;
+import com.example.demo.View.Component.*;
 import com.example.demo.View.Menus;
+import com.example.demo.Controller.animationController.*;
 import javafx.animation.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;

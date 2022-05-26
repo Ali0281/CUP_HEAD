@@ -1,11 +1,11 @@
-package com.example.demo.Controller;
+package com.example.demo.View.sceneController;
 
+import com.example.demo.Controller.ProgramController;
 import com.example.demo.Model.DataBase;
 import com.example.demo.Model.User;
 import javafx.fxml.FXML;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
 import java.util.ArrayList;

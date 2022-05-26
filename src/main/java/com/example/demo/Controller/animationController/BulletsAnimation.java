@@ -1,8 +1,11 @@
-package com.example.demo.Controller;
+package com.example.demo.Controller.animationController;
 
 import com.example.demo.Model.*;
+import com.example.demo.View.Component.BigBoss;
+import com.example.demo.View.Component.BigBossBullet;
+import com.example.demo.View.Component.Bullet;
+import com.example.demo.View.Component.MiniBoss;
 import javafx.animation.Transition;
-import javafx.scene.paint.Color;
 import javafx.util.Duration;
 
 import java.util.ArrayList;

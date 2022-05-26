@@ -1,6 +1,6 @@
-package com.example.demo.Controller;
+package com.example.demo.Controller.animationController;
 
-import com.example.demo.Model.MiniBoss;
+import com.example.demo.View.Component.MiniBoss;
 import javafx.animation.Transition;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;

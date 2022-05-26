@@ -1,5 +1,6 @@
-package com.example.demo.Controller;
+package com.example.demo.View.sceneController;
 
+import com.example.demo.Controller.ProgramController;
 import com.example.demo.Model.DataBase;
 import com.example.demo.Model.GameData;
 import javafx.application.Platform;

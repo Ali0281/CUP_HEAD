@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.Pane?>
 
 <Pane fx:id="pane" prefHeight="720" prefWidth="1280" stylesheets="@style.css" xmlns="http://javafx.com/javafx/18"
-      xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.Controller.Game">
+      xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.View.sceneController.Game">
     <children>
         <ProgressBar fx:id="progressBar" layoutX="440.0" layoutY="51.0" opacity="0.6" prefWidth="400.0" progress="1.0"
                      stylesheets="@style.css"/>

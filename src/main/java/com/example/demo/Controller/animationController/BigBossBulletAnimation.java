@@ -1,7 +1,6 @@
-package com.example.demo.Controller;
+package com.example.demo.Controller.animationController;
 
-import com.example.demo.Model.BigBossBullet;
-import com.example.demo.Model.Bullet;
+import com.example.demo.View.Component.BigBossBullet;
 import javafx.animation.Transition;
 import javafx.util.Duration;
 

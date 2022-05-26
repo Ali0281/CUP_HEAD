@@ -1,6 +1,6 @@
-package com.example.demo.Controller;
+package com.example.demo.Controller.animationController;
 
-import com.example.demo.Model.BigBoss;
+import com.example.demo.View.Component.BigBoss;
 import javafx.animation.Transition;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
@@ -13,7 +13,7 @@ import java.io.FileNotFoundException;
 public class BigBossAnimation extends Transition {
     BigBoss bigBoss = BigBoss.getInstance();
 
-    BigBossAnimation() {
+    public BigBossAnimation() {
         this.setCycleDuration(Duration.millis(7000)); // random
         this.setCycleCount(-1);
     }

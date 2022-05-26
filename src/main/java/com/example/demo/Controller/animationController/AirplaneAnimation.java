@@ -1,9 +1,10 @@
-package com.example.demo.Controller;
+package com.example.demo.Controller.animationController;
 
 import com.example.demo.Model.*;
+import com.example.demo.View.Component.Airplane;
+import com.example.demo.View.Component.BigBossBullet;
+import com.example.demo.View.Component.MiniBoss;
 import javafx.animation.Transition;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
@@ -15,7 +16,7 @@ import java.io.FileNotFoundException;
 public class AirplaneAnimation extends Transition {
     Airplane airplane = Airplane.getInstance();
 
-    AirplaneAnimation() {
+    public AirplaneAnimation() {
         this.setCycleDuration(Duration.millis(2000)); // random
         this.setCycleCount(-1);
     }
