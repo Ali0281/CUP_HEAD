@@ -10,6 +10,20 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+
+
+
+
+
+
+
+
+// received a link from ilya mahrooghi and shared with payam taebi and pouyas lahabi
+// link for my backGround :
+// http://edencoding.com/scene-background/#images
+// also my timeline code is from stack overflow
+// and my button css is from a site that i didn't save
+
 public class CupHead extends Application {
     public static Stage stage;
     public static MediaPlayer mediaPlayer;
